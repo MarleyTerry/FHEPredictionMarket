@@ -1,0 +1,24 @@
+# Directories
+node_modules/
+artifacts/
+cache/
+coverage/
+dist/
+deployments/
+typechain-types/
+
+# Files
+*.log
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+*.min.js
+*.bundle.js
+
+# Generated files
+coverage.json
+.env
+.env.local
