@@ -55,10 +55,10 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, userAddress, web3Servic
       // Reset form
       setPrediction(null)
       setBetAmount('0.01')
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Betting failed:', error)
-      let errorMessage = error instanceof Error ? error.message : 'Failed to place bet'
-
+      let errorMessage = error.message || 'Failed to place bet'
+      
       // Handle specific error cases
       if (errorMessage.includes('user rejected')) {
         errorMessage = 'Transaction was cancelled by user'
@@ -67,7 +67,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, userAddress, web3Servic
       } else if (errorMessage.includes('Market does not exist')) {
         errorMessage = 'Market ID 0 does not exist. Please create a market first.'
       }
-
+      
       onError(errorMessage)
     } finally {
       setBetting(false)
@@ -80,10 +80,9 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, userAddress, web3Servic
       await web3Service.resolveMarket(market.id, outcome)
       onError('') // Clear any previous errors
       // Note: In a real app, you'd refresh the market data here
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Resolution failed:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to resolve market'
-      onError(errorMessage)
+      onError(error.message || 'Failed to resolve market')
     } finally {
       setResolving(false)
     }
@@ -95,10 +94,9 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, userAddress, web3Servic
       await web3Service.claimWinnings(market.id)
       onError('') // Clear any previous errors
       // Note: In a real app, you'd refresh the market data here
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Claiming failed:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to claim winnings'
-      onError(errorMessage)
+      onError(error.message || 'Failed to claim winnings')
     } finally {
       setClaiming(false)
     }

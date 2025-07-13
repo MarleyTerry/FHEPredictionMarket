@@ -82,10 +82,9 @@ export class Web3Service {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: `0x${SEPOLIA_CHAIN_ID.toString(16)}` }],
       });
-    } catch (switchError: unknown) {
+    } catch (switchError: any) {
       // This error code indicates that the chain has not been added to MetaMask
-      const errorCode = (switchError as { code?: number }).code
-      if (errorCode === 4902) {
+      if (switchError.code === 4902) {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [
@@ -145,18 +144,16 @@ export class Web3Service {
       
       const receipt = await tx.wait();
       return receipt.hash;
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('PlaceBet error:', error);
-
+      
       // For missing revert data, provide a user-friendly message
-      const errorCode = (error as { code?: string }).code
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-      if (errorCode === 'CALL_EXCEPTION' && errorMessage.includes('missing revert data')) {
+      if (error.code === 'CALL_EXCEPTION' && error.message.includes('missing revert data')) {
         throw new Error('Transaction failed - contract may not have this market or function. But transaction was attempted.');
       }
-
+      
       // Allow other errors to pass through with more context
-      throw new Error(`Transaction failed: ${errorMessage}`);
+      throw new Error(`Transaction failed: ${error.message || 'Unknown error'}`);
     }
   }
 
@@ -198,10 +195,6 @@ export class Web3Service {
 
 declare global {
   interface Window {
-    ethereum: {
-      request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
-      on: (event: string, callback: (...args: unknown[]) => void) => void;
-      removeListener: (event: string, callback: (...args: unknown[]) => void) => void;
-    };
+    ethereum: any;
   }
 }

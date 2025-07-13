@@ -17,10 +17,9 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect, onError, web3S
     try {
       const walletState = await web3Service.connectWallet()
       onConnect(walletState)
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Wallet connection failed:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to connect wallet'
-      onError(errorMessage)
+      onError(error.message || 'Failed to connect wallet')
     } finally {
       setConnecting(false)
     }

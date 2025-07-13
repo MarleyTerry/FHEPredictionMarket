@@ -35,10 +35,9 @@ const CreateMarket: React.FC<CreateMarketProps> = ({ web3Service, onError, onSuc
       setDuration('7')
       
       onSuccess()
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Market creation failed:', error)
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create market'
-      onError(errorMessage)
+      onError(error.message || 'Failed to create market')
     } finally {
       setCreating(false)
     }

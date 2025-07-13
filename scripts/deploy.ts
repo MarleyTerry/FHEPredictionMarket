@@ -1,5 +1,4 @@
 import { ethers } from "hardhat";
-import fs from "fs";
 
 async function main() {
   console.log("Deploying PredictionMarket contract...");
@@ -19,8 +18,9 @@ async function main() {
   const contractAddress = await predictionMarket.getAddress();
 
   console.log("PredictionMarket deployed to:", contractAddress);
-
+  
   // Save the contract address and ABI for frontend use
+  const fs = require("fs");
   const contractInfo = {
     address: contractAddress,
     network: await ethers.provider.getNetwork(),
