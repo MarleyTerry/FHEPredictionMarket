@@ -20,6 +20,16 @@ This is the next generation of FHEVM development tooling - a unified SDK that wr
 - **🚀 Quick Setup**: Get started in less than 10 lines of code
 - **📚 Well Documented**: Comprehensive guides and examples
 
+
+
+## 🎬 Demo & Documentation
+
+### Live Demo
+🌐 **Website**: [https://prediction-market-sepia.vercel.app/](https://prediction-market-sepia.vercel.app/)
+
+### Video Demonstration
+demo.mp4
+
 ## 🏗️ Architecture
 
 ```
