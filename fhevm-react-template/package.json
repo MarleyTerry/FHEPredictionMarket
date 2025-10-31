@@ -1,0 +1,48 @@
+{
+  "name": "fhevm-sdk-monorepo",
+  "version": "1.0.0",
+  "description": "Universal SDK for building confidential dApps with FHEVM",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build:sdk",
+    "build:sdk": "cd packages/fhevm-sdk && npm run build",
+    "dev:nextjs": "cd examples/nextjs && npm run dev",
+    "dev:prediction-market": "cd examples/prediction-market && npm run dev",
+    "compile": "cd examples/prediction-market && npm run compile",
+    "deploy": "cd examples/prediction-market && npm run deploy",
+    "test": "cd packages/fhevm-sdk && npm test",
+    "lint": "npm run lint:sdk && npm run lint:examples",
+    "lint:sdk": "cd packages/fhevm-sdk && npm run lint",
+    "lint:examples": "cd examples/nextjs && npm run lint",
+    "clean": "rm -rf node_modules packages/*/node_modules examples/*/node_modules packages/*/dist",
+    "postinstall": "npm run build:sdk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/fhevm-sdk"
+  },
+  "keywords": [
+    "fhevm",
+    "encryption",
+    "blockchain",
+    "privacy",
+    "web3",
+    "sdk",
+    "react",
+    "nextjs",
+    "confidential-computing"
+  ],
+  "author": "FHEVM Community",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.8.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
