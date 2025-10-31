@@ -1,6 +1,16 @@
-# Confidential Prediction Market
+# Confidential Prediction Market - Monorepo
 
-A decentralized prediction market platform built with Solidity and Hardhat, featuring encrypted betting using Fully Homomorphic Encryption (FHE) technology. Users can create markets, place confidential bets, and claim winnings while maintaining privacy.
+A comprehensive repository containing multiple implementations of decentralized prediction markets built with Solidity, Hardhat, React, and Fully Homomorphic Encryption (FHE) technology. Users can create markets, place confidential bets, and claim winnings while maintaining complete privacy.
+
+## 📦 Repository Contents
+
+This monorepo contains three distinct projects:
+
+1. **Root Prediction Market** - Main implementation with full FHE integration
+2. **Standalone Prediction Market** (`prediction-market/`) - Independent React + Vite application
+3. **FHEVM SDK & Templates** (`fhevm-react-template/`) - Reusable SDK with Next.js and React examples
+
+Each project can be developed, deployed, and maintained independently while sharing common smart contract patterns and best practices.
 
 ## Features
 
@@ -19,24 +29,77 @@ The smart contract handles all prediction market logic including market creation
 
 ## 🎬 Demo & Documentation
 
-### Live Demo
-🌐 **Website**: [https://fhe-prediction-market.vercel.app/](https://fhe-prediction-market.vercel.app/)
+### Live Demos
 
-### Video Demonstration
-📹 **Demo Video**: Watch our comprehensive walkthrough showing how to:
-- Connect your Web3 wallet
-- Browse available prediction markets
-- Place encrypted bets with privacy protection
-- Track market outcomes and claim winnings
+This repository hosts multiple live deployments:
+
+#### 1. Main Prediction Market
+🌐 **Website**: [https://fhe-prediction-market.vercel.app/](https://fhe-prediction-market.vercel.app/)
+- Full-featured prediction market with FHEVM encryption
+- Deployed on Vercel
+- Connected to Sepolia testnet
+
+#### 2. Standalone Prediction Market
+🌐 **Website**: [https://prediction-market-sepia.vercel.app/](https://prediction-market-sepia.vercel.app/)
+- Independent implementation
+- React + Vite + Hardhat stack
+- Real-time market interactions
+
+#### 3. FHEVM SDK Examples
+See the [fhevm-react-template README](./fhevm-react-template/README.md) for SDK examples and documentation.
+
+### Video Demonstrations
+📹 **Demo Videos**: Comprehensive walkthroughs available showing:
+- **Main App**: Connect Web3 wallet, browse markets, place encrypted bets
+- **Prediction Market**: Create markets, place bets, claim winnings
+- **SDK Usage**: Integration examples with Next.js and React
+- **Transaction Examples**: On-chain operations and gas optimization
+
+### Documentation Files
+- **DEPLOYMENT.md**: Comprehensive deployment guide
+- **TESTING.md**: Testing strategies and test coverage
+- **SECURITY.md**: Security considerations and best practices
+- **CICD.md**: CI/CD pipeline setup and automation
+- **CONTRACT_INFORMATION.md**: Smart contract details and addresses
 
 ## Technology Stack
 
-- **Smart Contracts**: Solidity ^0.8.25
-- **Development Framework**: Hardhat
+### Backend & Smart Contracts
+- **Smart Contracts**: Solidity ^0.8.25 with Cancun EVM
+- **Development Framework**: Hardhat 2.24.3
 - **Encryption**: FHEVM (Fully Homomorphic Encryption Virtual Machine)
-- **Testing**: Hardhat + Chai
-- **Network**: Sepolia Testnet (deployment ready)
-- **Frontend**: React + Vite + ethers.js
+- **FHE Library**: @fhevm/solidity ^0.8.0
+- **Testing Framework**: Hardhat + Chai + Mocha
+- **Deployment Tools**: Hardhat Ethers Plugin, Hardhat Toolbox
+- **Network**: Sepolia Testnet (Chain ID: 11155111)
+- **Compiler Optimization**: Enabled (800 runs)
+
+### Frontend & UI
+- **Framework**: React 19.1.1
+- **Build Tool**: Vite 7.1.2
+- **Language**: TypeScript 5.8.3
+- **Web3 Library**: ethers.js 6.13.4
+- **Linting**: ESLint 9.33.0 with TypeScript ESLint 8.39.1
+- **React Plugins**:
+  - @vitejs/plugin-react 5.0.0
+  - eslint-plugin-react-hooks 5.2.0
+  - eslint-plugin-react-refresh 0.4.20
+
+### Development & Tooling
+- **Package Manager**: npm
+- **Environment Management**: dotenv 17.2.2
+- **Build Polyfills**: buffer 6.0.3, process 0.11.10
+- **Type Definitions**:
+  - @types/react 19.1.10
+  - @types/react-dom 19.1.7
+  - @types/node (via Hardhat)
+  - @types/minimatch 5.1.2
+
+### Deployment & Infrastructure
+- **RPC Endpoint**: Sepolia RPC (https://rpc.sepolia.org)
+- **Block Explorer**: Etherscan (Sepolia)
+- **Gas Limit**: 30,000,000 (local), Standard (Sepolia)
+- **Chain Support**: Hardhat local network, Sepolia testnet
 
 ## Prerequisites
 
@@ -45,7 +108,55 @@ The smart contract handles all prediction market logic including market creation
 - Git
 - MetaMask or compatible Web3 wallet
 
-## Quick Start
+## 🚀 Quick Start Guide
+
+Choose the project you want to work with:
+
+### Option 1: Root Prediction Market (Recommended for beginners)
+
+```bash
+# Install dependencies
+npm install
+
+# Compile contracts
+npm run compile
+
+# Run tests
+npm test
+
+# Start development server
+npm run dev
+```
+
+### Option 2: Standalone Prediction Market
+
+```bash
+# Navigate to subdirectory
+cd prediction-market
+
+# Install and run
+npm install
+npm run dev
+```
+
+### Option 3: FHEVM SDK Development
+
+```bash
+# Navigate to SDK project
+cd fhevm-react-template
+
+# Build SDK
+npm install
+npm run build:sdk
+
+# Run Next.js example
+cd examples/nextjs && npm install && npm run dev
+
+# Or run React Vite example
+cd examples/react-vite && npm install && npm run dev
+```
+
+## 📋 Detailed Setup
 
 ### 1. Clone and Install
 
@@ -95,10 +206,14 @@ npm run verify:sepolia
 
 ## Project Structure
 
+This repository contains multiple projects:
+
+### Root Level (Main Prediction Market)
 ```
 confidential-prediction-market/
 ├── contracts/              # Solidity smart contracts
-│   └── PredictionMarket.sol
+│   ├── PredictionMarket.sol           # Main contract
+│   └── PredictionMarketSimple.sol     # Simplified version
 ├── scripts/               # Deployment and interaction scripts
 │   ├── deploy.js         # Main deployment script
 │   ├── verify.js         # Contract verification script
@@ -106,14 +221,50 @@ confidential-prediction-market/
 │   └── simulate.js       # Full lifecycle simulation
 ├── test/                  # Test suite
 │   └── PredictionMarket.test.js
-├── deployments/           # Deployment artifacts (generated)
-├── artifacts/             # Compiled contracts (generated)
 ├── src/                   # Frontend source code
+│   ├── components/       # React components
+│   ├── utils/            # Utility functions
+│   ├── types/            # TypeScript definitions
+│   └── App.tsx           # Main application
+├── artifacts/             # Compiled contracts (generated)
+├── cache/                 # Hardhat cache (generated)
+├── dist/                  # Build output (generated)
 ├── hardhat.config.cjs    # Hardhat configuration
+├── vite.config.ts        # Vite configuration
 ├── package.json          # Project dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
 ├── .env.example          # Environment variables template
-├── DEPLOYMENT.md         # Comprehensive deployment guide
-└── README.md            # This file
+└── README.md             # This file
+```
+
+### Prediction Market Subdirectory
+```
+prediction-market/         # Standalone prediction market implementation
+├── contracts/            # FHEVM smart contracts
+│   └── PredictionMarket.sol
+├── scripts/              # Deployment scripts
+│   ├── deploy.ts
+│   └── initialize-demo.ts
+├── src/                  # React frontend
+│   ├── components/
+│   ├── utils/
+│   ├── types/
+│   └── App.tsx
+├── artifacts/            # Compiled contracts
+├── hardhat.config.cjs
+├── vite.config.ts
+├── package.json
+└── README.md
+
+fhevm-react-template/     # FHEVM SDK and examples
+├── packages/
+│   └── fhevm-sdk/       # Universal FHEVM SDK
+├── examples/
+│   ├── nextjs/          # Next.js example
+│   ├── react-vite/      # React + Vite example
+│   └── prediction-market/ # Prediction market example
+├── templates/           # Project templates
+└── README.md
 ```
 
 ## Smart Contract Overview
@@ -201,7 +352,51 @@ npm run interact:sepolia
 npm run simulate:sepolia
 ```
 
+## Working with Multiple Projects
+
+This repository contains three distinct projects that can be worked on independently:
+
+### 1. Root Prediction Market (Main Project)
+```bash
+# From root directory
+npm install
+npm run compile
+npm test
+npm run dev
+```
+
+### 2. Standalone Prediction Market
+```bash
+# Navigate to subdirectory
+cd prediction-market
+npm install
+npm run compile
+npm run dev
+```
+
+### 3. FHEVM React Template & SDK
+```bash
+# Navigate to SDK project
+cd fhevm-react-template
+
+# Build SDK
+npm install
+npm run build:sdk
+
+# Run Next.js example
+cd examples/nextjs
+npm install
+npm run dev
+
+# Run React Vite example
+cd examples/react-vite
+npm install
+npm run dev
+```
+
 ## Available Scripts
+
+### Root Project Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -219,6 +414,33 @@ npm run simulate:sepolia
 | `npm run clean` | Clean artifacts and cache |
 | `npm run dev` | Start frontend development server |
 | `npm run build` | Build frontend for production |
+
+### Prediction Market Subdirectory Scripts
+
+```bash
+cd prediction-market
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run compile          # Compile contracts
+npm run deploy:localhost # Deploy to local network
+npm run deploy:sepolia   # Deploy to Sepolia
+npm run init-demo        # Initialize demo data
+npm run test             # Run contract tests
+```
+
+### FHEVM Template Scripts
+
+```bash
+cd fhevm-react-template
+npm run build:sdk        # Build the SDK package
+npm run lint:sdk         # Lint SDK code
+npm run test             # Run tests
+
+# For examples
+cd examples/nextjs       # or react-vite
+npm run dev              # Start development
+npm run build            # Build for production
+```
 
 ## Testing
 
@@ -456,18 +678,36 @@ Contributions are welcome! Please follow these guidelines:
 
 ## Roadmap
 
+### Completed ✅
 - [x] Core prediction market functionality
 - [x] FHE integration for confidential betting
 - [x] Comprehensive testing suite
 - [x] Deployment scripts and documentation
-- [ ] Frontend interface with React
+- [x] Frontend interface with React + Vite
+- [x] Multiple project implementations (Root, Standalone, SDK)
+- [x] TypeScript integration throughout
+- [x] CI/CD pipeline setup
+- [x] Security audits and optimizations
+- [x] Live deployments on Vercel
+- [x] FHEVM SDK package with React hooks
+- [x] Next.js and React Vite examples
+- [x] Comprehensive documentation
+
+### In Progress 🚧
 - [ ] Advanced market types (multi-choice, ranges)
+- [ ] Mobile-responsive UI improvements
+- [ ] Enhanced analytics dashboard
+
+### Planned 📋
 - [ ] Liquidity pools for market making
-- [ ] Decentralized oracle integration
-- [ ] Mobile-responsive UI
-- [ ] Subgraph for event indexing
+- [ ] Decentralized oracle integration (Chainlink, Band Protocol)
+- [ ] Subgraph for event indexing (The Graph)
 - [ ] Governance token and DAO
-- [ ] Cross-chain deployment
+- [ ] Cross-chain deployment (Polygon, Arbitrum, Optimism)
+- [ ] Mobile native applications (iOS/Android)
+- [ ] Advanced FHE computation features
+- [ ] NFT-based market participation rewards
+- [ ] Social features and reputation system
 
 ## Resources
 
