@@ -6,6 +6,7 @@ A next-generation decentralized prediction market platform built with **Fully Ho
 
 **Website**: [https://fhe-prediction-market.vercel.app/](https://fhe-prediction-market.vercel.app/)
 
+**Demo Video**: demo.mp4
 ## 🌟 Key Innovations
 
 ### 1. **Gateway Callback Architecture**
